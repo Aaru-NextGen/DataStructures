@@ -1,14 +1,6 @@
-#include<stdio.h>
 #include<stdlib.h>
 #include<stdbool.h>
-
-/* Create list of array based on the initial size provided or start with 2 */
-typedef struct {
-    int size;
-    int capacity;
-    int* array;
-} ArrayList;
-
+#include<ArrayList.h>
 
 void checkAndDoubleSize(ArrayList* simpleArray){
     if (simpleArray->size == simpleArray->capacity){
@@ -56,7 +48,7 @@ void push(ArrayList* simpleArray, int newVal){
 void pop(ArrayList* simpleArray, int index){
     checkAndQuench(simpleArray);
     for (int i = index; i < simpleArray->size - 1; i++){
-        simpleArray->array[i] == simpleArray->array[i+1];
+        simpleArray->array[i] = simpleArray->array[i+1];
     }
     simpleArray->size -= 1;
 };
@@ -107,12 +99,10 @@ ArrayList initArrayList(){
     return array;
 };
 
-int main(){
-    ArrayList simpleArray = initArrayList();
-    for (int i = 0; i < 40; i++){
-        push(&simpleArray, i);
-        printf("capacity : %d, size : %d, value: %d\n", simpleArray.capacity, simpleArray.size, simpleArray.array[i]);
-    }
-    free(simpleArray.array);
-    return 0;
+int getValue(ArrayList* simpleArray, int index){
+    if (index < simpleArray->size){
+        return simpleArray->array[index];
+    } 
+    printf("This is out of index");
+    exit(1);
 }
